@@ -1,0 +1,45 @@
+# Ignorer les fichiers temporaires
+*.log
+*.tmp
+*.bak
+*.swp
+*.DS_Store
+*.ipynb_checkpoints/
+__pycache__/
+
+# Ignorer les dossiers personnels
+.anaconda/
+.conda/
+.continuum/
+.ipython/
+.jupyter/
+.keras/
+.vscode/
+.spyder-py3/
+AppData/
+OneDrive/
+NTUSER.DAT*
+ntuser.ini
+
+# Ignorer les environnements virtuels
+.venv/
+anaconda3/
+venv/
+
+# Ignorer les fichiers spécifiques à votre système
+Videos/
+Desktop/
+Documents/
+Downloads/
+Music/
+Pictures/
+
+# Ignorer les fichiers de modèle et de données inutiles
+augmented_images/
+datasetfinal0/
+images_generees/
+images_wifi/
+label_dataset/
+my_model.keras
+testset/
+trainset/

@@ -35,11 +35,10 @@ Music/
 Pictures/
 
 # Ignorer les fichiers de modèle et de données inutiles
-augmented_images/
-datasetfinal0/
-images_generees/
-images_wifi/
-label_dataset/
-my_model.keras
-testset/
-trainset/
+#augmented_images/
+#datasetfinal0/
+#images_generees/
+#images_wifi/
+#label_dataset/
+#testset/
+#trainset/

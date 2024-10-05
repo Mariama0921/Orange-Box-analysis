@@ -62,14 +62,20 @@ import streamlit as st
 logo_path = "images\orange-solo.png"  # Mets ici le chemin correct de ton image
 
 def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    except FileNotFoundError:
+        st.error(f"Logo image not found at the specified path: {image_path}")
+        return None
 
 # Vérifie si le logo existe et l'affiche
-if os.path.exists(logo_path):
-    logo_base64 = get_base64_image(logo_path)
+logo_base64 = get_base64_image(logo_path)
+
+if logo_base64:
+    st.markdown(f'<img src="data:image/png;base64,{logo_base64}" class="logo">', unsafe_allow_html=True)
 else:
-    st.error("Logo image not found at the specified path.")
+    st.error("Logo image could not be loaded.")
 
     
 # Afficher le logo et le titre sur la même ligne

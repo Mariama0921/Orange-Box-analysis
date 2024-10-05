@@ -70,7 +70,7 @@ if os.path.exists(logo_path):
     logo_base64 = get_base64_image(logo_path)
 else:
     st.error("Logo image not found at the specified path.")
->>>>>>> 5ef593d6b82c0a73c7ebd88216f78404da1dc498
+>>>>>>> 
 # Afficher le logo et le titre sur la même ligne
 st.markdown(f"""
     <div class="header">

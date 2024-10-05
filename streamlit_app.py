@@ -62,15 +62,11 @@ def get_base64_image(image_path):
 
 # Ajouter un logo
 logo_path = r'C:\Users\souley razak\Desktop\orange-solo.png'  # Chemin vers ton logo
-<<<<<<< HEAD
-logo_base64 = get_base64_image(logo_path)
-
-=======
 if os.path.exists(logo_path):
     logo_base64 = get_base64_image(logo_path)
 else:
     st.error("Logo image not found at the specified path.")
->>>>>>> 
+    
 # Afficher le logo et le titre sur la même ligne
 st.markdown(f"""
     <div class="header">

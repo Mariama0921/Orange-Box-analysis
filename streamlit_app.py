@@ -54,18 +54,23 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-logo_path = r'C:\Users\souley razak\PycharmProjects\Orange Box analysis\images\orange-solo.png'  # Chemin vers ton logo
-# Fonction pour convertir l'image en base64
+import os
+import base64
+import streamlit as st
+
+# Définir le chemin vers ton image de logo
+logo_path = "C:\Users\souley razak\PycharmProjects\Orange Box analysis\images\orange-solo.png"  # Mets ici le chemin correct de ton image
+
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode('utf-8')
+        return base64.b64encode(img_file.read()).decode()
 
-# Ajouter un logo
-
+# Vérifie si le logo existe et l'affiche
 if os.path.exists(logo_path):
     logo_base64 = get_base64_image(logo_path)
 else:
     st.error("Logo image not found at the specified path.")
+
     
 # Afficher le logo et le titre sur la même ligne
 st.markdown(f"""

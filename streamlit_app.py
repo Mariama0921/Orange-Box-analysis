@@ -54,14 +54,14 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-
+logo_path = r'C:\Users\souley razak\PycharmProjects\Orange Box analysis\images\orange-solo.png'  # Chemin vers ton logo
 # Fonction pour convertir l'image en base64
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode('utf-8')
 
 # Ajouter un logo
-logo_path = r'C:\Users\souley razak\Desktop\orange-solo.png'  # Chemin vers ton logo
+
 if os.path.exists(logo_path):
     logo_base64 = get_base64_image(logo_path)
 else:

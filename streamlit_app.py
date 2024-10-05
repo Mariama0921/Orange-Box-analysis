@@ -59,7 +59,7 @@ import base64
 import streamlit as st
 
 # Définir le chemin vers ton image de logo
-logo_path = "C:\Users\souley razak\PycharmProjects\Orange Box analysis\images\orange-solo.png"  # Mets ici le chemin correct de ton image
+logo_path = r'C:\Users\souley razak\PycharmProjects\Orange Box analysis\images\orange-solo.png'  # Mets ici le chemin correct de ton image
 
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:

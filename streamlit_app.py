@@ -4,6 +4,8 @@ from PIL import Image
 import numpy as np
 import base64
 import time
+import os  
+
 
 st.markdown("""
     <style>
@@ -54,12 +56,9 @@ st.markdown("""
     }
     </style>
     """, unsafe_allow_html=True)
-import os
-import base64
-import streamlit as st
 
-# Définir le chemin vers ton image de logo
-logo_path = "images/orange-solo.png"  # Utilise des slashs ou double antislashs
+
+logo_path = "images/orange-solo.png"  
 
 def get_base64_image(image_path):
     try:
@@ -69,22 +68,19 @@ def get_base64_image(image_path):
         st.error(f"Logo image not found at the specified path: {image_path}")
         return None
 
-# Vérifie si le logo existe et l'affiche
 logo_base64 = get_base64_image(logo_path)
 
+# Afficher le logo et le titre sur la même ligne, mais uniquement si le logo est chargé
 if logo_base64:
-    st.markdown(f'<img src="data:image/png;base64,{logo_base64}" class="logo">', unsafe_allow_html=True)
-else:
-    st.error("Logo image could not be loaded.")
-
-    
-# Afficher le logo et le titre sur la même ligne
-st.markdown(f"""
+    st.markdown(f"""
     <div class="header">
         <img src="data:image/png;base64,{logo_base64}" class="logo">
         <h1>Analyse de l'état de la box Wi-Fi</h1>
     </div>
     """, unsafe_allow_html=True)
+else:
+    st.error("Le logo n'a pas pu être chargé. Vérifiez le chemin de l'image.")
+
 
 # Charger le modèle
 model_path = r'C:\Users\souley razak\PycharmProjects\Orange Box analysis\myAI5_model.keras'
@@ -92,27 +88,29 @@ model = tf.keras.models.load_model(model_path)
 
 # Fonction de prédiction
 def predict_box_state(image):
-    image = np.array(image) / 255.0  # Normaliser l'image
-    image = np.expand_dims(image, axis=0)  # Ajouter une dimension batch
-    prediction = model.predict(image)
-    class_index = np.argmax(prediction, axis=1)[0]
-    return class_index
+    try:
+        image = np.array(image) / 255.0  # Normaliser l'image
+        image = np.expand_dims(image, axis=0)  # Ajouter une dimension batch
+        prediction = model.predict(image)
+        class_index = np.argmax(prediction, axis=1)[0]
+        return class_index
+    except Exception as e:
+        st.error(f"Erreur lors de la prédiction : {str(e)}")
+        return None
 
 # Ajouter un conteneur pour le reste du contenu
 with st.container():
     uploaded_file = st.file_uploader("Téléchargez une photo de votre box Wi-Fi", type="jpg")
+if uploaded_file:
+    image = Image.open(uploaded_file)
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.image(image, caption="Image téléchargée", use_column_width=True)
 
-    if uploaded_file:
-        image = Image.open(uploaded_file)
+    class_index = predict_box_state(np.array(image))
 
-        # Créer un layout avec deux colonnes : une pour l'image et une pour la prédiction
-        col1, col2 = st.columns([2, 1])
-        with col1:
-            st.image(image, caption="Image téléchargée", use_column_width=True)
-
-        # Prédiction après le téléchargement de l'image
-        class_index = predict_box_state(np.array(image))
-
+    if class_index is not None:
         with col2:
             # Afficher la classe prédite dans un rectangle de bordure orange
             st.markdown(f"""

@@ -74,6 +74,7 @@ if os.path.exists(logo_path):
 else:
     st.error("Logo image not found at the specified path.")
 
+
 # Afficher le logo et le titre sur la même ligne, mais uniquement si le logo est chargé
 if logo_base64:
     st.markdown(f"""
